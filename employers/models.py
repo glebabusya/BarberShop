@@ -43,7 +43,7 @@ class Employee(models.Model):
         null=True,
     )
 
-    is_available = models.BooleanField(verbose_name="", default=True)
+    is_available = models.BooleanField(verbose_name="is available", default=True)
     barbershop = models.ForeignKey(
         verbose_name="employee work place",
         to=BarberShop,
