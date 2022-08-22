@@ -1,9 +1,11 @@
-from os import environ
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
-if environ.get("BUILD_TYPE") == "DEV":
+if os.getenv("BUILD_TYPE") == "DEV":
     from .develop import *
-elif environ.get("BUILD_TYPE") == "PROD":
+elif os.getenv("BUILD_TYPE") == "PROD":
     from .production import *
 else:
     print("Unknown settings, develop installed")
