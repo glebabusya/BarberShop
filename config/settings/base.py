@@ -18,9 +18,11 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = []
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "base",
+]
 
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -89,3 +91,5 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "base.User"
