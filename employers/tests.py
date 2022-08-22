@@ -59,3 +59,25 @@ class EmployeeTestCase(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(models.Employee.objects.all().count(), 3)
+
+    def test_employee_password_set_ok(self):
+        url = reverse("employee-set-password", args=(2, ))
+        response = self.client.post(
+            url, data={
+                "password": "test",
+                "password2": "test"
+            }
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, {"status": "password set"})
+
+    def test_employee_password_set_400(self):
+        url = reverse("employee-set-password", args=(2, ))
+        response = self.client.post(
+            url, data={
+                "password": "test",
+                "password2": "test2"
+            }
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.data["non_field_errors"][0], "Passwords do not match")
