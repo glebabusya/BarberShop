@@ -69,3 +69,15 @@ class User(models.Model):
             self.password,
             algorithm="sha256",
         ).hexdigest()
+
+
+class BarberShop(models.Model):
+    """Model of open and working barbershops"""
+
+    address = models.TextField(verbose_name="address", max_length=500)
+    photo = models.ImageField(
+        verbose_name="barber shop photo", upload_to="addresses/%Y/%m/%d/"
+    )
+
+    def __str__(self):
+        return self.address
