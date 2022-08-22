@@ -1,7 +1,21 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from base.models import BarberShop
+
 User = get_user_model()
+
+
+class JobType(models.Model):
+    """Model of employee job types"""
+
+    name = models.CharField(verbose_name="name", max_length=125)
+    photo = models.ImageField(
+        verbose_name="job type photo",
+        upload_to="job types/%Y/%m/%d/",
+    )
+
+    def __str__(self):
+        return self.name
 
 
 class Employee(models.Model):
@@ -17,6 +31,9 @@ class Employee(models.Model):
         upload_to="employers/%Y/%m/%d/",
         blank=True,
         null=True,
+    )
+    job_types = models.ManyToManyField(
+        verbose_name="employee job types", to=JobType, related_name="employers"
     )
     rating = models.DecimalField(
         verbose_name="employee rating",
