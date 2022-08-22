@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
 
-# Create your views here.
+from employers import servises, serializers
+
+
+class EmployeeViewSet(ModelViewSet):
+    queryset = servises.get_available_employers()
+
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            return serializers.EmployeeCreateSerializer
+        return serializers.EmployeeSerializer
